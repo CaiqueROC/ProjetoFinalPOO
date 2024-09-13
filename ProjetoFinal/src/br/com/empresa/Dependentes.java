@@ -3,12 +3,15 @@ package br.com.empresa;
 import java.time.LocalDate;
 
 public class Dependentes extends Pessoa {
-      
-	private Parentesco parentesco;
 
-	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) {
+	private Parentesco parentesco;
+	private static Integer qntDependentes = 0;
+
+	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco,
+			Integer qntDependentes) {
 		super(nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
+		this.qntDependentes = qntDependentes;
 	}
 
 	public Parentesco getParentesco() {
@@ -18,6 +21,13 @@ public class Dependentes extends Pessoa {
 	public void setParentesco(Parentesco parentesco) {
 		this.parentesco = parentesco;
 	}
-	
-	
+
+	public static Integer getQntDependentes() {
+		return qntDependentes;
+	}
+
+	public void setQntDependentes(Integer qntDependentes) {
+		this.qntDependentes = qntDependentes;
+	}
+
 }
