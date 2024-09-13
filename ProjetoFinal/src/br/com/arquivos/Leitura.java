@@ -43,7 +43,7 @@ public class Leitura {
 
                     stringLinha = linha.split(";");
                     teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-                    Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste, Parentesco.FILHO);
+                    Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste, Parentesco.valueOf(stringLinha[3]));
                     System.out.println(d);
                     dependentes.add(d);
                     linha = br.readLine();
