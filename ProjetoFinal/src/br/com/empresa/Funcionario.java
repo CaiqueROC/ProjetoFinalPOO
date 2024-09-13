@@ -47,7 +47,7 @@ public class Funcionario extends Pessoa {
 		} else {
 
 			aliquota = 0.14;
-			deducao = 101.18;
+			deducao = 181.18;
 		}
 
 		descontoINSS = (salarioBruto * aliquota) - deducao;
