@@ -10,6 +10,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Leitura {
@@ -20,27 +22,34 @@ public class Leitura {
 
         path = "ProjetoFinal/src/br/com/arquivos/" + path + ".csv";
         BufferedReader br = new BufferedReader(new FileReader(path));
-        String[] linha = new String[4];
+        String[] stringLinha = new String[4];
+        String linha;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Dependentes> dependentes = new ArrayList<>();
 
         while (br.ready()) {
-            linha = br.readLine().split(";");
-            LocalDate teste = LocalDate.parse(linha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-//            Criar construtor recebendo 4 parâmetros
-//            Funcionario f = new Funcionario(linha[0], linha[1], teste, Double.parseDouble(linha[3]));
-            linha = br.readLine().split(";");
-            teste = LocalDate.parse(linha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-            Dependentes d = new Dependentes(linha[0], linha[1], teste, Parentesco.FILHO);
 
-/*
-                if (linha.length == 4) {
-                br.readLine();
-                System.out.println("teste");
+            linha = br.readLine();
+
+            if (!linha.isEmpty()) {
+                stringLinha = linha.split(";");
+                LocalDate teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+                Funcionario f = new Funcionario(stringLinha[0], stringLinha[1], teste, Double.parseDouble(stringLinha[3]));
+                System.out.println(f);
+                funcionarios.add(f);
+
+                linha = br.readLine();
+                while (!linha.isBlank()) {
+
+                    stringLinha = linha.split(";");
+                    teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+                    Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste, Parentesco.FILHO);
+                    System.out.println(d);
+                    dependentes.add(d);
+                    linha = br.readLine();
+                    if (linha == null) break;
+                }
             }
-
- */
-//            System.out.println(f);
-            System.out.println(d);
         }
     }
 }
-
