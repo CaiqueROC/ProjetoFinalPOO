@@ -5,27 +5,24 @@ import br.com.empresa.Funcionario;
 import br.com.empresa.Parentesco;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public class Leitura {
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        String path = sc.nextLine();
-        sc.close();
+public final class Read {
+    private Read() {
+    }
 
-        path = "ProjetoFinal/src/br/com/arquivos/" + path + ".csv";
+
+    public static List lerArquivo(String path) throws IOException {
+        List<Funcionario> funcionarios = new ArrayList<>();
+        List<Dependentes> dependentes = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(path));
         String[] stringLinha = new String[4];
         String linha;
-        List<Funcionario> funcionarios = new ArrayList<>();
-        List<Dependentes> dependentes = new ArrayList<>();
 
         while (br.ready()) {
 
@@ -50,6 +47,14 @@ public class Leitura {
                     if (linha == null) break;
                 }
             }
+//            System.out.println();
         }
+//        System.out.println(funcionarios.size());
+//        System.out.println(dependentes.size());
+
+        return funcionarios;
     }
+
 }
+
+
