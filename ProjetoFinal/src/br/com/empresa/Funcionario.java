@@ -30,7 +30,36 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		this.salarioBruto = salarioBruto;
 	}
 
+<<<<<<< HEAD
 	public double getDescontoINSS() {
+=======
+			aliquota = 0.075;
+			deducao = 0.;
+		}
+
+		else if (salarioBruto > 1412.00 && salarioBruto <= 2666.68) {
+
+			aliquota = 0.09;
+			deducao = 21.18;
+
+		} else if (salarioBruto > 2666.69 && salarioBruto <= 4000.03) {
+
+			aliquota = 0.12;
+			deducao = 101.18;
+		}
+
+		else if (salarioBruto > 4000.04 && salarioBruto <= 7786.02) {
+
+			aliquota = 0.14;
+			deducao = 181.18;
+		} else {
+
+			aliquota = 0.14;
+			deducao = 181.18;
+		}
+
+		descontoINSS = (salarioBruto * aliquota) - deducao;
+>>>>>>> e1085b8033d1c707b499f3cedb4b71f02b5e29d8
 		return descontoINSS;
 	}
 
