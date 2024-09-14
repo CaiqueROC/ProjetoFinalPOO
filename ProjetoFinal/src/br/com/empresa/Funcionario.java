@@ -9,12 +9,12 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 	private double salarioBruto;
 	private double descontoINSS;
 	private double descontoIR;
-	private List<Dependentes> dependente;
+	private int dependente;
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
 		super(nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
-		this.dependente = new ArrayList();
+		this.dependente = dependente;
 	}
 
 	@Override
@@ -44,6 +44,14 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 
 	public void setDescontoIR(double descontoIR) {
 		this.descontoIR = descontoIR;
+	}
+
+	public int getDependente() {
+		return dependente;
+	}
+
+	public void setDependente(int dependente) {
+		this.dependente = dependente;
 	}
 
 	@Override
@@ -110,7 +118,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		} else {
 
 			aliquota = 0.14;
-			deducao = 101.18;
+			deducao = 181.18;
 		}
 
 		descontoINSS = (salarioBruto * aliquota) - deducao;

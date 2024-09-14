@@ -7,11 +7,9 @@ public class Dependentes extends Pessoa {
 	private Parentesco parentesco;
 	private static Integer qntDependentes = 0;
 
-	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco,
-			Integer qntDependentes) {
+	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) {
 		super(nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
-		this.qntDependentes = qntDependentes;
 	}
 
 	public Parentesco getParentesco() {
