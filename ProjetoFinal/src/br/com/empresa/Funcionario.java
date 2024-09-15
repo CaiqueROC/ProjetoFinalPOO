@@ -9,7 +9,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 	private double salarioBruto;
 	private double descontoINSS;
 	private double descontoIR;
-	private int dependente;
+	private int dependente = 0;
 
 	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
 		super(nome, cpf, dataNascimento);
@@ -19,7 +19,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 
 	@Override
 	public String toString() {
-		return "salarioBruto: " + salarioBruto + "\ndescontoINSS: " + descontoINSS + "\ndescontoIR: " + descontoIR;
+		return "salarioBruto: " + salarioBruto + "\ndescontoINSS: " + calculoINSS() + "\ndescontoIR: " + calculoIR();
 	}
 
 	public double getSalarioBruto() {
@@ -30,37 +30,8 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		this.salarioBruto = salarioBruto;
 	}
 
-
 	public double getDescontoINSS() {
-
-			aliquota = 0.075;
-			deducao = 0.;
-		}
-
-		else if (salarioBruto > 1412.00 && salarioBruto <= 2666.68) {
-
-			aliquota = 0.09;
-			deducao = 21.18;
-
-		} else if (salarioBruto > 2666.69 && salarioBruto <= 4000.03) {
-
-			aliquota = 0.12;
-			deducao = 101.18;
-		}
-
-		else if (salarioBruto > 4000.04 && salarioBruto <= 7786.02) {
-
-			aliquota = 0.14;
-			deducao = 181.18;
-		} else {
-
-			aliquota = 0.14;
-			deducao = 181.18;
-		}
-
-		descontoINSS = (salarioBruto * aliquota) - deducao;
-
-		return descontoINSS;
+	return descontoINSS;
 	}
 
 	public void setDescontoINSS(double descontoINSS) {
@@ -85,7 +56,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 
 	@Override
 	public double calculoIR() {
-		double baseMensal = salarioBruto - descontoINSS - (dependente.size() * 189.59);
+		double baseMensal = salarioBruto - descontoINSS - (dependente * 189.59);
 
 		if (baseMensal <= 2259.00) {
 

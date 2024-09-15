@@ -8,9 +8,8 @@ public class Teste {
 
 		Funcionario f = new Funcionario("Rayssa", "20926220030", null, 6000.);
 
-		f.calcularSalarioLiquido();
-		f.calcularIR();
-		f.calcularInss();
+		f.calculoINSS();
+		f.calculoIR();
 
 		System.out.println(f);
 

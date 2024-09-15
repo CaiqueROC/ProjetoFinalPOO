@@ -3,6 +3,7 @@ package br.com.arquivos;
 import br.com.empresa.Dependentes;
 import br.com.empresa.Funcionario;
 import br.com.empresa.Parentesco;
+import br.com.exception.DependenteException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,33 +44,28 @@ public final class Read {
 					stringLinha = linha.split(";");
 					dependentes.add(stringLinha[1]);
 					teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-					Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste,
-							Parentesco.valueOf(stringLinha[3]));
-					for (String string : dependentes) {
-						
-						try {
-							if (d.getCpf().equals(stringLinha[1])) {
-								
-							} else {
-								System.out.println(d);
-								linha = br.readLine();
-								if (linha == null)
-									break;
-								
-							}
-							
-						} catch (Exception e) {
-							System.err.println("CPF já cadastrado!");
+
+					try {
+						Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste,
+								Parentesco.valueOf(stringLinha[3]));
+
+						System.out.println(d);
+						linha = br.readLine();
+						if (linha == null)
+							break;
+
+					} catch (DependenteException e) {
+						System.err.println("Erro ao cadastrar" + e.getMessage());
 					}
-					}
+
 				}
 			}
-//            System.out.println();
 		}
-//        System.out.println(funcionarios.size());
-//        System.out.println(dependentes.size());
-
 		return funcionarios;
 	}
 
+	public static void main(String[] args) throws IOException {
+		Read.lerArquivo("src/br/com/arquivos/teste.csv");
+
+	}
 }

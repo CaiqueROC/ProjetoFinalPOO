@@ -12,6 +12,11 @@ public class Dependentes extends Pessoa {
 		this.parentesco = parentesco;
 	}
 
+	@Override
+	public String toString() {
+		return "parentesco: " + parentesco;
+	}
+
 	public Parentesco getParentesco() {
 		return parentesco;
 	}
