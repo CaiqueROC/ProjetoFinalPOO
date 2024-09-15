@@ -30,9 +30,9 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		this.salarioBruto = salarioBruto;
 	}
 
-<<<<<<< HEAD
+
 	public double getDescontoINSS() {
-=======
+
 			aliquota = 0.075;
 			deducao = 0.;
 		}
@@ -59,7 +59,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		}
 
 		descontoINSS = (salarioBruto * aliquota) - deducao;
->>>>>>> e1085b8033d1c707b499f3cedb4b71f02b5e29d8
+
 		return descontoINSS;
 	}
 
