@@ -13,6 +13,7 @@ public class Write {
 
             for (Funcionario f : funcionarios) {
                 String linha = f.getNome() + ";" + f.getCpf() + ";" + f.calculoINSS() + ";" + f.calculoIR() + ";" + f.salarioLiquido();
+                writer.write(linha + "\n");
             }
             writer.close();
             System.out.println("Arquivo gravado com sucesso!");
