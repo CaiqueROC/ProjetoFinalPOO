@@ -16,7 +16,7 @@ import java.util.List;
 import javax.sound.midi.SysexMessage;
 
 public final class Read {
-	public Read() {
+	private Read() {
 	}
 
 	public static List lerArquivo(String path) throws IOException {
