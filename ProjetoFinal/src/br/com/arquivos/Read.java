@@ -16,51 +16,51 @@ import java.util.List;
 import javax.sound.midi.SysexMessage;
 
 public final class Read {
-	private Read() {
-	}
+    private Read() {
+    }
 
-	public static List lerArquivo(String path) throws IOException {
-		System.out.println("Lendo o arquivo...");
-		List<Funcionario> funcionarios = new ArrayList<>();
-		BufferedReader br = new BufferedReader(new FileReader(path));
-		String[] stringLinha = new String[4];
-		String linha;
+    public static List lerArquivo(String path) throws IOException {
+        System.out.println("Lendo o arquivo...");
+        List<Funcionario> funcionarios = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        String[] stringLinha = new String[4];
+        String linha;
 
-		while (br.ready()) {
-			linha = br.readLine();
-			if (!linha.isEmpty()) {
-				stringLinha = linha.split(";");
-				LocalDate dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-				Funcionario f = new Funcionario(stringLinha[0], stringLinha[1], dataNascimento,
-						Double.parseDouble(stringLinha[3]));
+        while (br.ready()) {
+            linha = br.readLine();
+            if (!linha.isEmpty()) {
+                stringLinha = linha.split(";");
+                LocalDate dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+                Funcionario f = new Funcionario(stringLinha[0], stringLinha[1], dataNascimento,
+                        Double.parseDouble(stringLinha[3]));
 
-				funcionarios.add(f);
+                funcionarios.add(f);
 
-				linha = br.readLine();
-				while (!linha.isBlank()) {
+                linha = br.readLine();
+                while (!linha.isBlank()) {
 
-					stringLinha = linha.split(";");
-					dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+                    stringLinha = linha.split(";");
+                    dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-					try {
-						Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], dataNascimento,
-								Parentesco.valueOf(stringLinha[3]));
+                    try {
+                        Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], dataNascimento,
+                                Parentesco.valueOf(stringLinha[3]));
 
-						linha = br.readLine();
-						f.setDependente(f.getDependente()+1);
-						if (linha == null)
-							break;
+                        linha = br.readLine();
+                        f.setDependente(f.getDependente() + 1);
+                        if (linha == null)
+                            break;
 
-					} catch (DependenteException e) {
-						System.err.println("Erro ao cadastrar " + e.getMessage());
-						linha = br.readLine();
-						if (linha == null)
-							break;
-					}
+                    } catch (DependenteException e) {
+                        System.err.println("Erro ao cadastrar " + e.getMessage());
+                        linha = br.readLine();
+                        if (linha == null)
+                            break;
+                    }
 
-				}
-			}
-		}
-		return funcionarios;
-	}
+                }
+            }
+        }
+        return funcionarios;
+    }
 }
