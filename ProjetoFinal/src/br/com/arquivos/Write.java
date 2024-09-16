@@ -12,7 +12,7 @@ public class Write {
             FileWriter writer = new FileWriter(caminho, true);
 
             for (Funcionario f : funcionarios) {
-                String linha = f.getNome() + ";" + f.getCpf() + ";" + f.getSalarioBruto() + ";";
+                String linha = f.getNome() + ";" + f.getCpf() + ";" + f.getDescontoINSS() + ";" + f.getDescontoIR() + ";" + f.salarioLiquido();
                 writer.write(linha + "\n");
             }
             writer.close();
