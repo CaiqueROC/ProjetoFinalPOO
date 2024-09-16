@@ -20,42 +20,42 @@ public final class Read {
 	}
 
 	public static List lerArquivo(String path) throws IOException {
+		System.out.println("Lendo o arquivo...");
 		List<Funcionario> funcionarios = new ArrayList<>();
-		List<String> dependentes = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		String[] stringLinha = new String[4];
 		String linha;
 
 		while (br.ready()) {
-
 			linha = br.readLine();
-
 			if (!linha.isEmpty()) {
 				stringLinha = linha.split(";");
-				LocalDate teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
-				Funcionario f = new Funcionario(stringLinha[0], stringLinha[1], teste,
+				LocalDate dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+				Funcionario f = new Funcionario(stringLinha[0], stringLinha[1], dataNascimento,
 						Double.parseDouble(stringLinha[3]));
-				System.out.println(f);
+
 				funcionarios.add(f);
 
 				linha = br.readLine();
 				while (!linha.isBlank()) {
 
 					stringLinha = linha.split(";");
-					dependentes.add(stringLinha[1]);
-					teste = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
+					dataNascimento = LocalDate.parse(stringLinha[2], DateTimeFormatter.ofPattern("yyyyMMdd"));
 
 					try {
-						Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], teste,
+						Dependentes d = new Dependentes(stringLinha[0], stringLinha[1], dataNascimento,
 								Parentesco.valueOf(stringLinha[3]));
 
-						System.out.println(d);
 						linha = br.readLine();
+						f.setDependente(f.getDependente()+1);
 						if (linha == null)
 							break;
 
 					} catch (DependenteException e) {
-						System.err.println("Erro ao cadastrar" + e.getMessage());
+						System.err.println("Erro ao cadastrar " + e.getMessage());
+						linha = br.readLine();
+						if (linha == null)
+							break;
 					}
 
 				}
@@ -63,9 +63,4 @@ public final class Read {
 		}
 		return funcionarios;
 	}
-
-//	public static void main(String[] args) throws IOException {
-//		Read.lerArquivo("src/br/com/arquivos/teste.csv");
-
-//	}
 }
