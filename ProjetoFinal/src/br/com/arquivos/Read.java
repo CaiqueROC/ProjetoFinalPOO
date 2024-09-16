@@ -64,8 +64,8 @@ public final class Read {
 		return funcionarios;
 	}
 
-	public static void main(String[] args) throws IOException {
-		Read.lerArquivo("src/br/com/arquivos/teste.csv");
+//	public static void main(String[] args) throws IOException {
+//		Read.lerArquivo("src/br/com/arquivos/teste.csv");
 
-	}
+//	}
 }
