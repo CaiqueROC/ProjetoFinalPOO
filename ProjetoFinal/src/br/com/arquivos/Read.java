@@ -1,11 +1,7 @@
 package br.com.arquivos;
 
-import br.com.empresa.Dependentes;
-import br.com.empresa.Funcionario;
-import br.com.empresa.Parentesco;
-import br.com.exception.DependenteException;
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -13,13 +9,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sound.midi.SysexMessage;
+import br.com.empresa.DependenteException;
+import br.com.empresa.Dependentes;
+import br.com.empresa.Funcionario;
+import br.com.empresa.Parentesco;
 
 public final class Read {
     private Read() {
     }
 
-    public static List lerArquivo(String path) throws IOException {
+    public static List lerArquivo(String path) throws FileNotFoundException, IOException {
         System.out.println("Lendo o arquivo...");
         List<Funcionario> funcionarios = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -37,6 +36,9 @@ public final class Read {
                 funcionarios.add(f);
 
                 linha = br.readLine();
+                if (linha == null) {
+                	break;
+                }
                 while (!linha.isBlank()) {
 
                     stringLinha = linha.split(";");

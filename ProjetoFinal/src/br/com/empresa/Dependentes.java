@@ -5,14 +5,9 @@ import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.com.exception.DependenteException;
 
 public class Dependentes extends Pessoa {
-      /*/Criar uma classe DependenteException para tratar exceções de
-dependente:
-● Todo dependente tem que ser menor que 18 anos.
-● Não pode existir dependentes com o mesmo CPF.
-      */
+
 	private Parentesco parentesco;
     private static Set<String> cpfsCadastrados = new HashSet<>();
 
@@ -43,9 +38,9 @@ dependente:
 		
 	}
 		   private void ParentescoValido( Parentesco parentesco) throws DependenteException{
-			boolean ParentescoValido = parentesco == Parentesco.FILHO || parentesco == Parentesco.SOBRINHO;
+			boolean ParentescoValido = parentesco == Parentesco.FILHO || parentesco == Parentesco.SOBRINHO || parentesco == Parentesco.OUTROS;
 		    if (!ParentescoValido) {
-			throw new DependenteException ("Parentesco de dependente não valido. Apenas FILHO e SOBRINHO são permitidos. ");
+			throw new DependenteException ("Parentesco de dependente não valido. Apenas FILHO, OUTROS e SOBRINHO são permitidos. ");
 			}
 	}
 	
