@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     String url = "jdbc:postgresql://localhost:5432/projeto_final";
     String user = "postgres";
-    String password = "kaisa5main";
+    String password = "senha";
 
     private Connection con;
 
