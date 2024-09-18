@@ -2,18 +2,21 @@ package br.com.empresa;
 
 import java.time.LocalDate;
 
+import br.com.extra.Validador;
+import br.com.extra.ValidadorException;
+
 public abstract class Pessoa {
 
 	private String nome;
 	private String cpf;
 	private LocalDate dataNascimento;
 
-	public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
-		
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dataNascimento = dataNascimento;
-	}
+	 public Pessoa(String nome, String cpf, LocalDate dataNascimento) throws ValidadorException {
+	        this.nome = nome;
+	        Validador.validarCPF(cpf); // Validação do CPF
+	        this.cpf = cpf;
+	        this.dataNascimento = dataNascimento;
+	    }
 
 	public String getNome() {
 		return nome;
@@ -27,16 +30,17 @@ public abstract class Pessoa {
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+	public void setCpf(String cpf) throws ValidadorException {
+        Validador.validarCPF(cpf); // Validação do CPF
+        this.cpf = cpf;
+    }
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
+	 public void setDataNascimento(LocalDate dataNascimento) {
+	        this.dataNascimento = dataNascimento;
+	    }
 
 }

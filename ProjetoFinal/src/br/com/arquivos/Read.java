@@ -7,21 +7,38 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.swing.JOptionPane;
 
 import br.com.empresa.DependenteException;
 import br.com.empresa.Dependentes;
 import br.com.empresa.Funcionario;
 import br.com.empresa.Parentesco;
+import br.com.extra.ValidadorException;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public final class Read {
-    private Read() {
-    }
 
-    public static List lerArquivo(String path) throws FileNotFoundException, IOException {
-        System.out.println("Lendo o arquivo...");
+	public static List lerArquivo(String path) throws FileNotFoundException, IOException, NumberFormatException, ValidadorException, DependenteException {
+		
+		JOptionPane.showMessageDialog(null, "Lendo os Dados... \n Arquivo Gravado!!");
         List<Funcionario> funcionarios = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(path));
+
         String[] stringLinha = new String[4];
         String linha;
 
@@ -37,7 +54,8 @@ public final class Read {
 
                 linha = br.readLine();
                 if (linha == null) {
-                	break;
+
+                    break;
                 }
                 while (!linha.isBlank()) {
 
@@ -50,17 +68,23 @@ public final class Read {
 
                         linha = br.readLine();
                         f.setDependente(f.getDependente() + 1);
-                        if (linha == null)
+
+                        if (linha == null) {
+
                             break;
+                        }
 
                     } catch (DependenteException e) {
-                        System.err.println("Erro ao cadastrar " + e.getMessage());
+                        System.err.println("Erro ao cadastrar!! " + e.getMessage());
                         linha = br.readLine();
-                        if (linha == null)
+                        if (linha == null) {
                             break;
+                        }
                     }
 
                 }
+
+
             }
         }
         return funcionarios;

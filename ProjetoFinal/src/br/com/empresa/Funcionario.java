@@ -1,8 +1,10 @@
 package br.com.empresa;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
+import br.com.extra.Validador;
+import br.com.extra.ValidadorException;
+
 
 public class Funcionario extends Pessoa implements InterfaceMetodos {
 
@@ -11,12 +13,11 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 	private double descontoIR;
 	private int dependente = 0;
 
-	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
-		super(nome, cpf, dataNascimento);
-		this.salarioBruto = salarioBruto;
-		this.dependente = dependente;
-	}
-
+	  public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) throws ValidadorException {
+	        super(nome, cpf, dataNascimento);
+	        Validador.validarSalarioBruto(salarioBruto); // Validação do salário bruto extra
+	        this.salarioBruto = salarioBruto;
+	    }
 	@Override
 	public String toString() {
 		return "salarioBruto: " + salarioBruto + "\ndescontoINSS: " + calculoINSS() + "\ndescontoIR: " + calculoIR();
@@ -26,9 +27,9 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 		return salarioBruto;
 	}
 
-	public void setSalarioBruto(double salarioBruto) {
-		this.salarioBruto = salarioBruto;
-	}
+	public void setSalarioBruto(double salarioBruto) throws ValidadorException {
+        Validador.validarSalarioBruto(salarioBruto);
+    }
 
 	public double getDescontoINSS() {
 	return descontoINSS;

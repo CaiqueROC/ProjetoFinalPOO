@@ -5,18 +5,20 @@ import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.com.extra.ValidadorException;
+
 
 public class Dependentes extends Pessoa {
 
 	private Parentesco parentesco;
     private static Set<String> cpfsCadastrados = new HashSet<>();
 
-	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) throws DependenteException {
+	public Dependentes(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) throws DependenteException, ValidadorException {
 		super(nome, cpf, dataNascimento);
 		this.parentesco = parentesco;
-		
 		DependenteValido(dataNascimento, cpf);  
-	     ParentescoValido(parentesco); 
+		
+	    ParentescoValido(parentesco); 
 	    cpfsCadastrados.add(cpf);
 	}
 
@@ -28,8 +30,9 @@ public class Dependentes extends Pessoa {
 		this.parentesco = parentesco;
 	}
 	private void DependenteValido(LocalDate dataNascimento,String cpf) throws DependenteException{
+		//Validador.validarDataNascimento(dataNascimento);
 		if(Period.between(dataNascimento , LocalDate.now()).getYears()>=18) {
-			throw new DependenteException ("Pessoa com idade igual ou mair a 18 anos não é um dependente valido. ");
+			throw new DependenteException ("Dependente com idade igual ou maior a 18 anos não é válido. ");
 		}
 		if (cpfsCadastrados.contains(cpf)) {
 			throw new DependenteException("CPF já existente. ");
@@ -42,7 +45,10 @@ public class Dependentes extends Pessoa {
 		    if (!ParentescoValido) {
 			throw new DependenteException ("Parentesco de dependente não valido. Apenas FILHO, OUTROS e SOBRINHO são permitidos. ");
 			}
+		   }
+		   
+		    
 	}
 	
 	
-}
+

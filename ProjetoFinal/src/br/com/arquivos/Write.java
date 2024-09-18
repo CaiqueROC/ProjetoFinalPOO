@@ -16,7 +16,7 @@ public class Write {
 				writer.write(linha + "\n");
 			}
 			writer.close();
-			System.out.println("Arquivo gravado com sucesso!");
+	
 
 		} catch (IOException e) {
 			System.out.println("Erro ao escrever o arquivo.");
