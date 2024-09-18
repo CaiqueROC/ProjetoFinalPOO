@@ -9,11 +9,16 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 	private double salarioBruto;
 	private double descontoINSS;
 	private double descontoIR;
+	private int diasTrabalhados;
+	private double valeTransporte;
 	private int dependente = 0;
 
-	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto) {
+	public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salarioBruto, int diasTrabalhados) {
 		super(nome, cpf, dataNascimento);
 		this.salarioBruto = salarioBruto;
+		this.descontoINSS = descontoINSS;
+		this.descontoIR = descontoIR;
+		this.diasTrabalhados = diasTrabalhados;
 		this.dependente = dependente;
 	}
 
@@ -31,7 +36,7 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 	}
 
 	public double getDescontoINSS() {
-	return descontoINSS;
+		return descontoINSS;
 	}
 
 	public void setDescontoINSS(double descontoINSS) {
@@ -52,6 +57,14 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 
 	public void setDependente(int dependente) {
 		this.dependente = dependente;
+	}
+
+	public int getDiasTrabalhados() {
+		return diasTrabalhados;
+	}
+
+	public void setDiasTrabalhados(int diasTrabalhados) {
+		this.diasTrabalhados = diasTrabalhados;
 	}
 
 	@Override
@@ -127,8 +140,14 @@ public class Funcionario extends Pessoa implements InterfaceMetodos {
 
 	@Override
 	public double salarioLiquido() {
-		return salarioBruto - descontoINSS - descontoIR;
+		return salarioBruto - descontoINSS - descontoIR - valeTransporte();
 
+	}
+
+	@Override
+	public double valeTransporte() {
+		valeTransporte = (diasTrabalhados * 5.30) * 2;
+		return valeTransporte;
 	}
 
 }

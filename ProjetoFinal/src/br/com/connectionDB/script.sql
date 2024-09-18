@@ -1,3 +1,5 @@
+select * from folha_pagamento fp 
+
 CREATE table funcionario(
 ID serial primary key,
 nome varchar(60) not null,
@@ -21,6 +23,7 @@ ID serial primary key,
 desconto_INSS decimal,
 desconto_IR decimal,
 salario_liquido decimal,
+vale_transporte decimal,
 id_funcionario int,
 foreign key (id_funcionario) references funcionario(id),
 data_calculo date
